@@ -7,6 +7,8 @@ import { Subject } from 'rxjs/Subject';
 
 import { DirectoryItemI } from '../../directory.service';
 import { StorageService } from '../../storage.service';
+import {TranslateService} from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-contact-add',
@@ -25,7 +27,8 @@ export class ContactAddComponent implements OnInit, OnDestroy {
     private _storageService: StorageService,
     private _location: Location,
     private _router: Router,
-    private _activateRoute: ActivatedRoute) { }
+    private _activateRoute: ActivatedRoute,
+    private translate: TranslateService) { }
 
   ngOnInit() {
     this.action = this._activateRoute.snapshot.paramMap.get('action');
@@ -82,7 +85,7 @@ export class ContactAddComponent implements OnInit, OnDestroy {
       this._router.navigate(['/call', this.form.value.number]);
       return;
     }
-  }
+}
 
   updateContact() {
     if (this.form.status === 'VALID') {

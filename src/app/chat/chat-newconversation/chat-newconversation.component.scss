@@ -13,6 +13,9 @@ $blue: #2BA6FF;
     height: calc(100% - 52px);
     flex-direction: column;
 }
+.mat-input-container.app-input-no-underline .mat-input-underline {
+    display: none !important;
+  }
 .back {
     color: $blue;
     float: left;
@@ -42,7 +45,7 @@ $blue: #2BA6FF;
         
         .name {
             color: $dark;
-            font-weight: 300;
+            font-weight: bold;
         }
     }
 }

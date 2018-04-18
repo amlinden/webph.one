@@ -1,67 +1,101 @@
+
 import { Component, OnInit, HostListener, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import {Injectable} from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import { Location } from '@angular/common';
 import { StorageService } from '../../storage.service';
-import {DirectoryItemI} from  '../../directory.service';
 import { JsSipService } from '../../jssip.service';
 import { SmsService } from '../../sms.service';
 import { ChatMessageI } from '../chat-list/chat-list.component';
 import { Observable } from 'rxjs/Observable';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { DirectoryService, DirectoryI, DirectoryItemI } from '../../directory.service';
 import { AsyncPipe } from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
-interface ConversationI {
-  messages: ChatMessageI[];
-  to?: string;
-  chatId?: string;
-  myNumber: string;
-}
+import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+//HÄR
+import {startWith} from 'rxjs/operators/startWith';
+import {map} from 'rxjs/operators/map';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Http,Response } from '@angular/http';
+
+@Injectable()
 
 @Component({
-  selector: 'app-chat-conversation',
-  templateUrl: './chat-conversation.component.html',
-  styleUrls: ['./chat-conversation.component.scss']
+  selector: 'app-chat-newconversation',
+  templateUrl: './chat-newconversation.component.html',
+  styleUrls: ['./chat-newconversation.component.scss']
 })
-export class ChatConversationComponent implements OnInit, OnDestroy {
-  public contacts: Observable<DirectoryItemI[]>;
+
+export class ChatNewconversationComponent implements OnInit, OnDestroy {
+  searchResult = [];  
   @ViewChild('conversation', { read: ElementRef }) public conversation: ElementRef;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  public action: string;
+  
+  //public contacts: Observable<DirectoryItemI[]>;
   public chat;
   public chatId;
   public fixed = false;
   public top: number;
+  //contactForm: FormGroup;
+  nameChangeLog: string[] = [];
+  
+  //autocomplete
   myControl: FormControl;
+  filteredContacts: Observable<any[]>;
+  contacts: DirectoryItemI[] = [];
 
   
   public message = '';
-
+  url: string
+  isLoading = false;
+      
   constructor(
+    private http : Http,
     private el: ElementRef,
     private _smsServie: SmsService,
     private _router: Router,
     public storageService: StorageService,
+    public directoryService: DirectoryService,
     private _route: ActivatedRoute,
     private _jsSip: JsSipService,
-    private _location: Location,
+    private _location: Location
   ) { 
-    this.myControl = new FormControl();
+        
     this.contacts = storageService
       .table('contacts')
       .read()
-      .takeUntil(this.ngUnsubscribe);
+      .takeUntil(this.ngUnsubscribe)
+      // .subscribe(contacts => {
+      //   this.contacts = contacts;
+      // });
+      
+    //autocomplete - formcontrol
+    this.myControl = new FormControl();
+    this.filteredContacts = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filterContacts(val))
+      );
+      console.log(this.filteredContacts);
    }
+//.title?
+  filterContacts(title: string) {
+    return this.contacts.filter(contact =>
+      contact.title.toLowerCase().indexOf(title.toLowerCase()) === 0);
+  }
+  existContact(number) {
+    return this.contacts.filter(contact => contact.number === Number(number)).length > 0;
+  }
+  send(chatId) {
+    this._smsServie.sendSms(this.message, this.chatId);
+    this.message = null;
+  }
+
 
   ngOnInit() {
-    this.chatId = this._route.snapshot.paramMap.get('id') || '';
-    console.log("CHTAID"+this.chatId);
-  //   this.contacts.subscribe(contact=> {
-  //     this.myGridOptions.rowData = contact as CountryData[]
-  // });
-
-
     this._smsServie
     .getChat(this.chatId)
     .takeUntil(this.ngUnsubscribe)
@@ -73,10 +107,10 @@ export class ChatConversationComponent implements OnInit, OnDestroy {
       this.scrollOnMessage();
       this._smsServie.markAsRead(x.chatId);
     });
-  console.log('[SMS] - Chat in list', this.chat);
   this.top = this.el.nativeElement.parentElement.offsetTop - this.el.nativeElement.offsetTop;
-}
-
+  }
+  
+  
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
@@ -103,12 +137,6 @@ export class ChatConversationComponent implements OnInit, OnDestroy {
       element.style.overflowY = 'scroll';
     }
   }
-
-  send() {
-    this._smsServie.sendSms(this.message, this.chatId);
-    this.message = null;
-  }
-
   call() {
     this._jsSip.handleOutgoingCall('', this.chatId);
   }

@@ -1,0 +1,67 @@
+<!-- input has to become CHATID -->
+<div class="chat" [class.fixed-on-top]="fixed" *ngIf="chat">  
+  
+  <div class="chat-header">
+      <mat-icon class="back" svgIcon="arrowback" (click)="goBack()"></mat-icon>
+      <span class="to">{{ 'chat.to' | translate}}:
+
+          <form class="example-form">
+              <mat-form-field>    
+                <input matInput  type="text" [matAutocomplete]="auto" [formControl]="myControl">
+                
+              </mat-form-field>
+            </form>
+      </span>
+      
+      
+
+  </div> 
+    
+    
+    <div class="conversation" #conversation>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let contact of contacts | async" [value]="contact.title" >
+        <span>{{contact.title}}</span>                    
+      </mat-option>
+    </mat-autocomplete> 
+
+
+<!-- input has to become CHATID -->
+<div class="chat" [class.fixed-on-top]="fixed" *ngIf="chat">  
+  
+
+
+
+
+        <!-- <div *ngFor="let item of chat.messages; let i = index; let first = last;" [class.right]="item.from === chat.myNumber">
+          <div *ngIf="first">
+            <div class="date">
+              <span>{{item.createdAt | date:'shortDate' }}</span>
+            </div>
+          </div>
+          <div *ngIf="!first && isDiferentDate(item.createdAt, chat.messages[i + 1]?.createdAt)">
+            <div class="date">
+              <span>{{item.createdAt | date:'shortDate' }}</span>
+            </div>
+          </div>
+          <div class="message">
+            {{item.content}}
+            <div class="time">{{item.createdAt | date:'shortTime' }}</div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    
+      <div class="text-input">
+        <div class="write">
+          <textarea (keyup)="grow($event)" [(ngModel)]="message" placeholder="{{ 'chat.message' | translate}}"></textarea>
+          <mat-icon svgIcon="send" (click)="send()" class="write-link send" [class.disable]="message === '' || message === null"></mat-icon> 
+        </div> -->
+      </div>
+</div>
+
+    
+    
+    
+       
+    

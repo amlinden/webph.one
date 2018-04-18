@@ -1,8 +1,19 @@
 <div class="chat" [class.fixed-on-top]="fixed" *ngIf="chat">
   <div class="chat-header">
-    <span>To: <span class="name">{{chatId}}</span></span>
-    <mat-icon class="push-right" svgIcon="call" (click)="call()"></mat-icon>
+      <mat-icon class="back" svgIcon="arrowback" (click)="goBack()"></mat-icon>
+    <span class="to">{{ 'chat.to' | translate}}: 
+      
+      <div style="display:inline-block"*ngFor="let contact of contacts  | async ">
+         <div style="display:inline-block"*ngIf="contact.number === chatId">
+            <span class="name">{{contact.title}} </span>
+         </div>
+        </div>
+        {{chatId}}{{Number(contact.number) }}
+      </span>
+    <mat-icon class="push-right" svgIcon="call" (click)="call()">{{ 'chat.call' | translate}}</mat-icon>
   </div>
+
+
   <div class="conversation" #conversation>
     
     <div *ngFor="let item of chat.messages; let i = index; let first = last;" [class.right]="item.from === chat.myNumber">
@@ -26,8 +37,10 @@
 
   <div class="text-input">
     <div class="write">
-      <textarea (keyup)="grow($event)" [(ngModel)]="message" placeholder="Message..."></textarea>
-      <a href="javascript:;" (click)="send()" class="write-link send" [class.disable]="message === '' || message === null"></a>
+      <textarea (keyup)="grow($event)" [(ngModel)]="message" placeholder="{{ 'chat.message' | translate}}"></textarea>
+      <mat-icon svgIcon="send" (click)="send()" class="write-link send" [class.disable]="message === '' || message === null"></mat-icon> 
     </div>
   </div>
 </div>
+
+

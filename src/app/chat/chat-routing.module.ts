@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { ChatNewconversationComponent } from './chat-newconversation/chat-newconversation.component';
 import { ChatConversationComponent } from './chat-conversation/chat-conversation.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 
@@ -12,6 +12,11 @@ const routes: Routes = [{
 {
     path: 'chat/conversation/:id',
     component: ChatConversationComponent,
+    pathMatch: 'full'
+},
+{
+    path: 'chat/newconversation',
+    component: ChatNewconversationComponent,
     pathMatch: 'full'
 }];
 

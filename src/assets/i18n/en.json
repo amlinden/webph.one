@@ -1,9 +1,31 @@
 {
-    "call": {
-        "calling": "Call",
-        "save": "Save number"
-    },
-    "callservice": {
-        "heading": "Test"
-    }
+	"call": {
+		"call": "CALL",
+		"calling": "Calling",
+		"save": "Save number",
+		"end": "End call",
+		"incoming": "INCOMMING CALL",
+		"established": "Call established with"
+	},
+	"navbar": {
+		"call": "Call",
+		"message": "Conversations",
+		"contacts": "Contacts"
+	},
+	"contact": {
+		"save": "Save",
+		"name": "Name",
+		"mynumber": "My number",
+		"telephone": "Telephone",
+		"contacts": "Contacts",
+		"new": "New contact",
+		"cancel": "Cancel",
+		"delete": "Delete contact"
+	},
+	"chat": {
+		"new": "New message",
+		"to": "To",
+		"message": "Message...",
+		"call": "Call"
+	}
 }

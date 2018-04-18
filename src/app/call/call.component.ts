@@ -60,6 +60,8 @@ export class CallComponent implements OnInit, OnDestroy {
   }
 
   addContact(number: string) {
+
+    console.log(number + Number(number));
     this.router.navigate(['/directory', 'add', number]);
   }
 

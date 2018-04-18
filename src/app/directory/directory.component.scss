@@ -1,34 +1,49 @@
+.new-contact {
+    width: 100%;
+    right: 15px;
+    color: #2BA6FF;
+    .mat-button{
+        float: right;
+    }
+    
+}
+
+
 h3.mat-subheader {
     text-align: center;
     color: #1155CD;
     font-size: 1.1em;
-    font-weight: bold;
 }
 .list {
     flex: row-reverse !important;
-    color: #1155CD;
+    color: #000000;
     mat-icon {
         width: 30px;
+        color: #2BA6FF;
     }
 }
 .my-number {
     font-size: 1em;
-    font-weight: normal;
-    margin: 15px;
-    color: #1155CD;
-    span {
-        float: right;
-        font-weight: bold;
-    }
+    font-weight: 200;
+    margin-left: 15px;
+    margin-top: 35px;
+    color: #000000;
 }
+.number{
+    margin: 15px;
+    margin-bottom: 10px;
+    color: #8E8E8E;
+}
+
 .contacts-list {
-    overflow: hidden;
+    height: calc(100% - 65px);
+    overflow-y: scroll;
     margin-top: 7px;
 }
 .contacts-list > h3 {
     cursor: pointer;
-    color: #000;
-    background: #ffee5a;
+    color: #8E8E8E;
+    background: #EFEFEF;
     margin-top: -10px;
 }
 

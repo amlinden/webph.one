@@ -1,28 +1,38 @@
-<h3 (click)="goBack()"><mat-icon svgIcon="arrow-down"></mat-icon> 
-  <span *ngIf="action === 'add'">Add new contact</span>
-  <span *ngIf="action === 'edit'">Edit contact</span>
-</h3>
-
+<div>
+<span *ngIf="action === 'add'" (click)="goBack()" class="cancel">{{ 'contact.cancel' | translate}}
+  <!-- <span *ngIf="action === 'add'">Add new contact</span> -->
+</span>
+<span *ngIf="action === 'edit'" (click)="goBack()" class="cancel">{{ 'contact.cancel' | translate}}
+    <!-- <span *ngIf="action === 'add'">Add new contact</span> -->
+  </span>
+<div class="save" *ngIf="action === 'add'">
+    <span (click)="submit()">{{ 'contact.save' | translate}}</span>
+</div>
+<div class="save" *ngIf="action === 'edit'">
+    <span (click)="submit()">{{ 'contact.save' | translate}}</span>
+</div>
+</div>
+<br><br>
 <form [formGroup]="form" (ngSubmit)="submit()">
 
   <mat-form-field class="full-width">
     <mat-icon matPrefix svgIcon="call"></mat-icon>
-    <input type="string" matInput placeholder="Telephone" formControlName="number" appInputPhonenumber>
+    <input type="string" matInput placeholder="{{ 'contact.telephone' | translate}}" formControlName="number" appInputPhonenumber>
   </mat-form-field>
   
 
   <mat-form-field class="full-width custom-input">
     <mat-icon matPrefix svgIcon="person"></mat-icon>
-    <input type="text" matInput placeholder="Name" formControlName="title">
+    <input type="text" matInput placeholder="{{ 'contact.name' | translate}}" formControlName="title">
   </mat-form-field>
 
   <div class="bottom" *ngIf="action === 'add'">
-    <button mat-button type="submit" class="full-width btn-save">Save</button>
+    <button mat-button type="submit" class="full-width btn-save"></button>
   </div>
   
   <div class="bottom" *ngIf="action === 'edit'">
-    <button mat-button type="submit" class="half-width btn-save" [disabled]="!form.valid">Edit</button>
-    <button mat-button type="submit" (click)="deleteContact($event)" class="half-width btn-delete">Delete</button>
+    <!-- <button mat-button type="submit" class="half-width btn-save" [disabled]="!form.valid">Edit</button> -->
+    <button mat-button type="submit" (click)="deleteContact($event)" class="full-width btn-delete">{{ 'contact.delete' | translate}}</button>
   </div>
 
 </form>

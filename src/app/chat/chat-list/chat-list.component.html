@@ -1,8 +1,19 @@
-<mat-list>
-  <mat-list-item  *ngFor="let item of chatItems | async" [class.unread]="item.unread" (click)="goTo(item._id)">
-    <h3 matLine><span >{{item.from}}</span></h3>
-    <p matLine>
-      <span> {{item.lastMessage.content}} </span>
-    </p>
-  </mat-list-item>
-</mat-list>
+<div class="messages" >
+    <div class="new-contact" >
+        <button mat-button (click)="goTonewmessage()">
+            {{ 'chat.new' | translate}}
+          <mat-icon svgIcon="writemessage"></mat-icon>
+        </button>
+      </div>
+<mat-card *ngFor="let item of chatItems | async" [class.unread]="item.unread" (click)="goTo(item._id)" class="card">
+  <mat-card-header>
+    <mat-card-title>
+        {{item.from}}<span style="right:15px; color:grey;position: absolute; font-size: 12px;">{{item.lastMessage.createdAt | date:'shortDate' }}</span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{item.lastMessage.content}}
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+</div>
+

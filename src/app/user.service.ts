@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { GuiNotificationsService } from './gui-notifications.service';
 import { environment } from '../environments/environment';
 import { settings } from './jssip.config';
+import { TranslateService } from '@ngx-translate/core';
 
 import { StorageService } from './storage.service';
 
@@ -54,6 +55,7 @@ export class UserService {
     private _storageService: StorageService,
     private _http: Http,
     private _swPush: SwPush,
+    private translate: TranslateService,
     private _guiNotification: GuiNotificationsService
     ) {
     _storageService

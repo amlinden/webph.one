@@ -1,11 +1,31 @@
 {
-    "call": {
-        "calling": "Llamar",
-        "save": "Guardar numero"
-    },
-    "navbar": {
-        "call": "Llamar",
-        "message": "Conversationes",
-        "contacts": "Contactos"
-    }
+	"call": {
+		"call": "LLAMAR",
+		"calling": "Lammando",
+		"save": "Guardar numero",
+		"end": "Finalizar",
+		"incoming": "LLAMADA",
+		"established": "Llama established with"
+	},
+	"navbar": {
+		"call": "Llamar",
+		"message": "Chats",
+		"contacts": "Contactos"
+	},
+	"contact": {
+		"save": "Guardar",
+		"name": "Nombre",
+		"mynumber": "Mi número",
+		"telephone": "Teléfono",
+		"contacts": "Contactos",
+		"new": "Nuevo contacto",
+		"cancel": "Cancelar",
+		"delete": "Eliminar contacto"
+	},
+	"chat": {
+		"new": "Nuevo mensaje",
+		"to": "Para",
+		"message": "Enviar un mensaje",
+		"call": "Llamar"
+	}
 }

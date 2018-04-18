@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
+import { TranslateService } from '@ngx-translate/core';
+
 
 export interface DirectoryItemI {
   number: number;
@@ -24,7 +26,7 @@ export class DirectoryService {
   obs: Observable<DirectoryI[]>;
   directoryLoaded: DirectoryI[];
 
-  constructor(_http: Http) {
+  constructor(_http: Http,  private translate: TranslateService) {
       this.obs = _http.get('directory.json')
       .map(response => response.json())
       .do(res => this.directoryLoaded = res);

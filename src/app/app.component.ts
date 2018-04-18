@@ -27,13 +27,12 @@ import { StorageService } from './storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  call:Object = this.translate.get('call').subscribe((res) => {res.calling; console.log(res)});
-  /** This object manages the top navigation bar. */
-  public links: any[] = [
-    { label: "call", link: '/call' },
-    { label: 'Directory', link: '/directory' },
-    { label: 'Share', link: '/share' }
-  ];
+call: string;
+conversations: string;
+contacts: string;
+
+  
+  public links: any[] = [];
 
   constructor(
     public iconRegistry: MatIconRegistry,
@@ -53,8 +52,11 @@ export class AppComponent {
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('es');
 
-    translate.get('call').subscribe((res) => {
-    this.call = res.calling; console.log(this.call)});
+    translate.get('navbar').subscribe((res) => {
+      this.links = [{ label: res.call, link: '/call' },
+      { label: res.message, link: '/chat' },
+      { label: res.contacts, link: '/directory' }];
+    });
     // Apply migration from the old database.
     this.checkVersion();
     this.checkDB().then( () => {
@@ -67,11 +69,15 @@ export class AppComponent {
       'call',
       'contact-add',
       'arrow-down',
+      'arrowback',
       'person',
       'star-full',
       'star-border',
       'close',
-      'sms'
+      'sms',
+      'send',
+      'writemessage'
+
     ]);
 
     // Listen for autoanswer and autoreject messages

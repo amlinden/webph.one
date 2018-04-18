@@ -1,9 +1,16 @@
+<div class="new-contact">
+  <button mat-button class="add" (click)="addContact(number)">
+     {{ 'contact.new' | translate}}
+    <mat-icon svgIcon="contact-add"></mat-icon>
+  </button>
+</div>
 
-<h3 *ngIf="user && user._id" class="my-number">
-  My number <span>{{ user.user | phoneNumber }}</span>
-</h3>
+<h3 *ngIf="user && user._id" class="my-number"> {{ 'contact.mynumber' | translate}} </h3>
+<span class="number">{{ user.user | phoneNumber }}</span>
 
-<mat-nav-list *ngFor="let directory of directories | async" [@toggleState]="directoryToggle" class="contacts-list">
+
+
+<!-- <mat-nav-list *ngFor="let directory of directories | async" [@toggleState]="directoryToggle" class="contacts-list">
   <h3 matSubheader (click)="toggleDirectoryList(directoryToggle)">
     {{directory.title}} 
         <mat-icon svgIcon="arrow-down" class="arrow" [@arrowState]="directoryToggle"></mat-icon>
@@ -14,18 +21,19 @@
      <h3 matLine>{{ item.subtitle }}</h3>
      <mat-icon svgIcon="call"></mat-icon>&nbsp;{{item.number}}
   </a>
-</mat-nav-list>
+</mat-nav-list> -->
 
 <mat-nav-list [@toggleState]="contactsToggle" class="contacts-list">
   <h3 matSubheader (click)="toggleContactsList(contactsToggle)">
-    Contact list
+    {{ 'contact.contacts' | translate}}
     <mat-icon svgIcon="arrow-down" class="arrow" [@arrowState]="contactsToggle"></mat-icon>
   </h3>  
-  <a mat-list-item *ngFor="let item of contacts | async" class="list">
+  <a  class="make-scrollable" mat-list-item  *ngFor="let item of contacts | async | orderBy: order " class="list">
      <mat-icon mat-list-icon svgIcon="person" (click)="edit(item)"></mat-icon>&nbsp;
      <h3 matLine><b>{{ item.title }}</b></h3>
      <h3 matLine>{{ item.subtitle || (item.number | phoneNumber )}}</h3>
      <mat-icon svgIcon="call" (click)="call(item)"></mat-icon>&nbsp;&nbsp;
      <mat-icon svgIcon="sms" (click)="sms(item)"></mat-icon>&nbsp;
   </a>
+
 </mat-nav-list>

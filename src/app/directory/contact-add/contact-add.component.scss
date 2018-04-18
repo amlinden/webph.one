@@ -1,11 +1,19 @@
 .full-width {
   width: 100%;
 }
-
+.cancel {
+    color: #2BA6FF;
+    padding: 15px !important;
+    float: left;
+}
+.save {
+    color: #2BA6FF;
+    float: right;
+    padding: 15px;
+}
 h3 {
     cursor: pointer;
     color: #000;
-    background: #ffee5a;
     margin-top: 0px;
     padding: 10px;
 }
@@ -20,12 +28,12 @@ mat-icon {
 }
 
 .btn-save {
-    background: green;
+    background:  #00DCC0;
     color: #fff;
 }
 
 .btn-delete {
-    background: red;
+    background: #D1404A;
     color: #fff;
 }
 
@@ -42,14 +50,15 @@ mat-icon {
 
 form {
     padding: 0 20px;
+    margin-top: 20px; 
 }
 
 form /deep/ .mat-focused .mat-input-placeholder {
-    color: rgb(17,85,206);
+    color: #2BA6FF;
 }
 
 form /deep/ .mat-focused mat-icon {
-    color: rgb(17,85,206);
+    color: #2BA6FF;
 }
 
 form /deep/ .mat-focused .mat-input-ripple {

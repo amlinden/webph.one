@@ -5,14 +5,17 @@
     left: 0px;
     height: 100vh;
     width: 100vw;
-    background: rgba(0,0,0,0.9);
+    background: #00DCC0;
     color: #fff;
     text-align: center;
     .box {
         padding-top: 40vh;
         .hangup {
-            background: red;
+            background:white;
+            color:red;
+            width: 100%;
         }
+
         .take-call {
             background: green;
         }

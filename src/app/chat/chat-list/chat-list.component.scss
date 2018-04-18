@@ -1,3 +1,37 @@
 .unread h3, .unread p {
     font-weight: bold;
 }
+
+.new-contact {
+    width: 100%;
+    right: 15px;
+    height: 40px !important;
+    color: #2BA6FF;
+    .mat-button{
+        float: right;
+    }
+    
+}
+
+.aligned-right{
+    right: 0px;
+    position: absolute;
+    font-size: 12px;
+  }
+
+.mat-card-header-text {
+     margin: 0px !important;
+}
+
+.messages{
+    height: calc(100% - 65px);
+    //width: calc(100% - 15px);
+}
+
+.card {
+    display: flex;
+    //width: 100%;
+    flex-direction: column;
+    margin: 8px;
+    padding: 15px;
+  }

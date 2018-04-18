@@ -13,6 +13,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';  
 
 import { CustomMaterialModule } from './material.module';
+import {MatCardModule} from '@angular/material/card';
+//order
+import { OrderModule } from 'ngx-order-pipe';
+
+import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
+
 
 import { AppComponent } from './app.component';
 
@@ -32,8 +38,9 @@ import { CallSurveyService } from './call-survey.service';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { GuiNotificationsService } from './gui-notifications.service';
 import { SmsService } from './sms.service';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
-import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
+import {MatIconModule,  MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 
 
@@ -103,7 +110,11 @@ export const appRoutes: Routes  = [
     ShareModule,
     DirectoryModule,
     ChatModule,
-    CommonModule
+    CommonModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    OrderModule
   ],
   providers: [
     ToneService,
